@@ -31,7 +31,11 @@ class Flight{
     
   }
   
-  static public void readFlights()  { 
+  public String getOrigin() {
+   return from;
+  }
+  
+  public static void readFlights()  { 
     
     
     String fileName;
