@@ -1,0 +1,114 @@
+import java.util.*;
+import java.io.*;
+
+class Flight{
+  
+  //class attributes 
+  int number = 0;
+  String from = " ";
+  String to = " ";
+  int depart = 0;
+  int arrive = 0;
+  double price = 0.0;
+  int seats = 0;
+  String airline = " ";
+  
+  //arraylist of objects
+  static ArrayList <Flight> GTAflights = new ArrayList <Flight>();
+  
+  public Flight(int n, String f, String t, int d, int a, double p, int s, String air){
+    
+    number = n;
+    from = f;
+    to = t;
+    depart = d;
+    arrive = a;
+    price = p;
+    seats = s;
+    airline = air;
+    
+    //GTAflights.add(this);
+    
+  }
+  
+  static public void readFlights()  { 
+    
+    
+    String fileName;
+    //Scanner nameReader = new Scanner(System.in);
+    //System.out.println("Enter a file to read flight data from");
+    fileName = "Flights.csv";//nameReader.nextLine();
+    try{
+      Scanner scan = new Scanner(new FileReader(fileName));
+      
+      StringTokenizer st; 
+      
+      int number = 0;
+      String from = " ";
+      String to = " ";
+      int depart = 0;
+      int arrive = 0;
+      double price = 0.0;
+      int seats = 0;
+      String airline = " ";
+      //int index = 0;
+      scan.nextLine(); //skip that first line
+      while(scan.hasNext()) {  //I realize this is pretty ugly
+        st = new StringTokenizer(scan.next(), "\t\n\r\f,?!;: ");
+        number = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(scan.next(), "\t\n\r\f,?!;: ");
+        from = st.nextToken();
+        st = new StringTokenizer(scan.next(), "\t\n\r\f,?!;: ");
+        to = st.nextToken();
+        st = new StringTokenizer(scan.next(), "\t\n\r\f,?!;: ");
+        depart = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(scan.next(), "\t\n\r\f,?!;: ");
+        arrive = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(scan.next(), "\t\n\r\f,?!;: ");
+        price = Double.parseDouble(st.nextToken());
+        st = new StringTokenizer(scan.next(), "\t\n\r\f,?!;: ");
+        seats = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(scan.next(), "\t\n\r\f,?!;: ");
+        airline = st.nextToken();
+        
+        
+        GTAflights.add(new Flight(number, from, to, depart, arrive, price, seats, airline));
+        scan.nextLine();
+      }
+      scan.close();
+    }catch(Exception ex){
+      ex.printStackTrace();
+    }
+    
+  }
+  
+  
+  static public void printFlights(){
+    
+    System.out.println(GTAflights);
+    
+  }
+  
+  
+  public String toString(){
+    return "Flight " + number + " on " + airline + " from " + from + " at " + depart + " to " + to + " at " + arrive;
+  }
+  
+  //this is the begginnings of my Digraph algorithm
+  
+/*  public Itinerary createItinerary(String alpha, String omega){
+    
+    ArrayList <Itinerary> output = new ArrayList <Itinerary>();
+    
+    for(int i = 0; i < GTAflights.size(); i++){ //populate a list with flights with our desired origin
+      if(GTAflights.get(i).from == alpha){
+        output.add(new Itinerary(GTAflights.get(i).);
+        
+      }
+    }
+    
+    
+    Itinerary a = new Itinerary(); //placeholder
+    return a;
+  }*/
+}
