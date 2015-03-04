@@ -1,7 +1,6 @@
-
-/**
- * Who wrote this anyway and what does it do?
- */
+//Airmap class
+//draws the Airmap
+//last edited 3/4/15 by Matthew Schroeder
 
 import java.awt.*;
 import javax.swing.*;
@@ -50,5 +49,12 @@ static int latSpread = 46;
    private int ycoord(float latitude) {
       return (int) (((maxLat - latitude)/latSpread) * windowHeight); //return the latitude to pixel y coord
       }
-  
+      
+      public static void drawLines() {
+         for(int i = 0; i < Airport.GTAairports.size(); i++) {
+            for(int j = 0; j < Airport.GTAairports.flights.size(); j++) {
+               gr.drawLine(xcoord((int)Airport.GTAairports.get(i).getLongitude() + Airport.GTAairports.get(i).getnudgeLon()), ycoord((int)Airport.GTAairports.get(i).getLatitude() + Airport.GTAairports.get(i).getnudgeLat()), 50, 50);
+            }
+         }
+      }   
 }
