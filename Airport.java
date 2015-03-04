@@ -10,7 +10,8 @@ class Airport{
   float longitude;
   float nudgeLat; //the latitude and longitude amounts to nudge airport names for map readability 
   float nudgeLon;
-  int delay ;
+  int delay;
+  ArrayList <Flight> flights = new ArrayList <Flight>();
   
   //arraylist of airport objects
   static ArrayList <Airport> GTAairports = new ArrayList <Airport>();
@@ -22,13 +23,28 @@ class Airport{
     latitude = lat;
     longitude = longi;
     delay = del;
-    ArrayList <Flight> flights = new ArrayList <Flight>();
+    
     
     GTAairports.add(this); //adds the airport object to the arraylist when it is created
     
     
   }
   
+  
+  
+  public void assignFlights() {
+  /* for each Airport in our ArrayList, parse the
+  ArrayList of flights. If the flight originates from
+  our Airport, assign that flight to Airport.flights
+  ArrayList*/
+   for(int i = 0; i < GTAairports.size(); i++) {
+      for(int j = 0; j < Flight.GTAflights.size(); j++) {
+         if(Flight.GTAflights.get(j).getOrigin() == GTAairports.get(i).name)
+            GTAairports.get(i).flights.add(Flight.GTAflights.get(j));
+       }
+    }
+} // end assignFlights()
+      
    
   
   static public void readAirports()  { 
